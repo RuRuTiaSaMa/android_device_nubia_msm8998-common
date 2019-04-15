@@ -24,6 +24,9 @@
 
 $(call inherit-product, vendor/nubia/msm8998-common/msm8998-common-vendor.mk)
 
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
