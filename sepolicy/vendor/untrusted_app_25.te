@@ -1,0 +1,18 @@
+allow untrusted_app_25 anr_data_file:dir read;
+
+allow untrusted_app_25 hal_memtrack_default:binder call;
+
+allow untrusted_app_25 proc_version:file { getattr open read };
+allow untrusted_app_25 proc_vmstat:file { getattr open read };
+allow untrusted_app_25 runtime_event_log_tags_file:file { open read };
+allow untrusted_app_25 sysfs_net:dir search;
+allow untrusted_app_25 sysfs_wlan_address:file { getattr open read };
+
+allow untrusted_app_25 property_type:file { getattr open read };
+
+allow untrusted_app_25 sysfs_battery_supply:dir search;
+allow untrusted_app_25 sysfs_battery_supply:file read;
+allow untrusted_app_25 sysfs_batteryinfo:dir search;
+allow untrusted_app_25 sysfs_msm_subsys:dir search;
+allow untrusted_app_25 sysfs_usb_supply:dir search;
+allow untrusted_app_25 sysfs_usb_supply:file { getattr open read };

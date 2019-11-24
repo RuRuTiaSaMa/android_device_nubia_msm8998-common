@@ -1,0 +1,1 @@
+allow timeservice_app property_type:file read;

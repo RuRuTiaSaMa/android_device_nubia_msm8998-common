@@ -1,0 +1,1 @@
+allow isolated_app property_type:file read;

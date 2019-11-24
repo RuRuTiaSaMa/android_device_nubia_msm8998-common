@@ -1,0 +1,60 @@
+# Amplifier TAS2555
+type persist_amp_cal_file, file_type;
+
+# DEBUG
+type debugfs_rmt, debugfs_type, fs_type;
+type debugfs_wlan, debugfs_type, fs_type;
+type debugfs_ufs, debugfs_type, fs_type;
+
+# Fingerprint
+type fingerprint_data_file, data_file_type, file_type, core_data_file_type;
+type sysfs_fingerprint, sysfs_type, fs_type;
+
+# Input devices
+type idc_file, file_type, vendor_file_type;
+type keylayout_file, file_type, vendor_file_type;
+
+# IR Remote
+type sysfs_ir_remote, sysfs_type, fs_type;
+
+# Touchpanel
+type sysfs_touchpanel, fs_type, sysfs_type;
+
+# Vibrator
+#type sysfs_vibrator, sysfs_type, file_type;
+
+# /sys
+type sysfs_msm_subsys, sysfs_type, fs_type;
+
+
+# Wi-Fi
+type sysfs_wifi, sysfs_type, fs_type;
+
+# /proc
+type proc_kernel_sched, fs_type, proc_type;
+
+# msm_irqbalance
+type proc_irq, fs_type, proc_type;
+type sysfs_irq, sysfs_type, fs_type;
+type irqbalance_socket, file_type;
+
+#/persist
+type persist_battery_file, file_type;
+
+#scsi
+type sysfs_scsi_devices_0000, sysfs_type, fs_type;
+
+# wlan address
+type sysfs_wlan_address, sysfs_type, fs_type;
+
+# Wifi driver state
+type sysfs_wifi_driver_state, sysfs_type, fs_type;
+
+# Battery Stats file
+typeattribute sysfs_batteryinfo mlstrustedobject;
+
+# Usb Fast Charge
+type sysfs_usb_charge, fs_type, sysfs_type;
+
+# Kcal	
+type kcal_dev, sysfs_type, file_type; 

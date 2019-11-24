@@ -1,0 +1,1 @@
+allow secure_element property_type:file read;

@@ -1,0 +1,2 @@
+allow sensors self:capability { net_raw sys_admin dac_override };
+allow sensors sysfs_msm_subsys:dir search;

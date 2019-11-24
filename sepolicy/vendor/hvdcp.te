@@ -1,0 +1,2 @@
+allow hvdcp sysfs_msm_subsys:dir search;
+allow hvdcp sysfs_batteryinfo:dir search;

@@ -1,0 +1,2 @@
+allow nfc property_type:file read;
+allow nfc runtime_event_log_tags_file:file { open read };

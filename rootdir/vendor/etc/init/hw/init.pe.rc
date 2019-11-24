@@ -1,0 +1,288 @@
+# Copyright (c) 2013-2019, The Linux Foundation. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of The Linux Foundation nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
+on post-fs
+    chmod 0755 /sys/kernel/debug/tracing
+
+on boot
+    #enable camera read sensors data
+    setprop persist.camera.gyro.disable 0
+
+    #Remove SUID bit for iproute2 ip tool
+    chmod 0755 /system/bin/ip
+    
+    #for audio driver to read
+    chmod 0644 /mnt/vendor/persist/tas2555_cal.bin
+
+    chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
+
+    setprop net.tcp.2g_init_rwnd 10
+    
+     # Allow access to emmc rawdump block partition and dload sysfs node
+    chown root system /dev/block/bootdevice/by-name/rawdump -p /dev/block/
+    chmod 0660 /dev/block/bootdevice/by-name/rawdump -p /dev/block/
+    chown root system /sys/kernel/dload/emmc_dload
+    chmod 0660 /sys/kernel/dload/emmc_dload
+    chown root system /dev/block/bootdevice/by-name/ramdump -p /dev/block/
+    chmod 0660 /dev/block/bootdevice/by-name/ramdump -p /dev/block/
+    chown root system /sys/kernel/dload/dload_mode
+    chmod 0660 /sys/kernel/dload/dload_mode
+
+    chown system system /sys/class/backlight/panel0-backlight/brightness
+    chown system system /sys/class/backlight/panel0-backlight/max_brightness
+
+    # Allow access to sensors device attributes
+    chown system system /sys/class/sensors/MPU6050-accel/enable
+    chown system system /sys/class/sensors/MPU6050-accel/poll_delay
+    chown system system /sys/class/sensors/MPU6050-gyro/enable
+    chown system system /sys/class/sensors/MPU6050-gyro/poll_delay
+    chown system system /sys/class/sensors/apds9930-light/enable
+    chown system system /sys/class/sensors/apds9930-light/poll_delay
+    chown system system /sys/class/sensors/apds9930-proximity/enable
+    chown system system /sys/class/sensors/apds9930-proximity/poll_delay
+    chown system system /sys/class/sensors/compass/enable
+    chown system system /sys/class/sensors/compass/poll_delay
+    chown system system /sys/class/sensors/bma2x2-accel/enable
+    chown system system /sys/class/sensors/bma2x2-accel/poll_delay
+    chown system system /sys/class/sensors/ltr553-light/enable
+    chown system system /sys/class/sensors/ltr553-light/poll_delay
+    chown system system /sys/class/sensors/ltr553-proximity/enable
+    chown system system /sys/class/sensors/ltr553-proximity/poll_delay
+    chown system system /sys/class/sensors/ap3426-light/enable
+    chown system system /sys/class/sensors/ap3426-light/poll_delay
+    chown system system /sys/class/sensors/ap3426-proximity/enable
+    chown system system /sys/class/sensors/ap3426-proximity/poll_delay
+    
+# Nubia begin feature add sensors node
+    # hall_device
+    chown system system /sys/class/hall_device/hall_device/enable
+    chmod 0644 /sys/class/hall_device/hall_device/enable
+
+    # fingerprint
+    mkdir /dev/fpcSocket 0770 system system
+    chmod -R 0777 /dev/fpcSocket
+    chown system system /sys/bus/platform/devices/1.fpc1020/irq
+    chown system system /sys/bus/platform/devices/1.fpc1020/wakeup_enable
+
+    # ir remote
+    chown system system /sys/class/ir_remote/ir_remote/enable
+    chmod 0644 /sys/class/ir_remote/ir_remote/enable
+
+    # proximity
+    chown system system /sys/class/proximity/proximity/enable
+    chown system system /sys/class/proximity/proximity/prox_uncover_max
+    chown system system /sys/class/proximity/proximity/reg
+    chown system system /sys/class/proximity/proximity/prox_value
+    chown system system /sys/class/proximity/proximity/dev_init
+    chown system system /sys/class/proximity/proximity/delay
+    chmod 0777 /persist/sensors
+    chown system system /sys/class/proximity/proximity/prox_manual_calibrate_threshold
+    chown system system /sys/class/proximity/proximity/prox_init
+    chown system system /sys/class/proximity/proximity/prox_threshold_init
+    chown system system /sys/class/proximity/proximity/prox_offset_init
+    chown system system /sys/class/proximity/proximity/prox_thres
+    chown system system /sys/class/proximity/proximity/chip_name
+    chown system system /sys/class/proximity/proximity/prox_threshold_cal_start
+    chown system system /sys/class/proximity/proximity/prox_offset_cal_start
+    chown system system /sys/class/proximity/proximity/prox_offset_cal
+    chown system system /sys/class/proximity/proximity/prox_data_safe_range_max
+    chown system system /sys/class/proximity/proximity/prox_data_safe_range_min
+    chown system system /sys/class/proximity/proximity/prox_calibrate
+    chown system system /sys/class/proximity/proximity/prox_calibrate_start
+    chown system system /sys/class/proximity/proximity/prox_calibrate_result
+    chown system system /sys/class/proximity/proximity/prox_data_max
+    chown system system /sys/class/proximity/proximity/prox_debug
+    chown system system /sys/class/proximity/proximity/prox_thres_max
+    chown system system /sys/class/proximity/proximity/prox_thres_min
+    chown system system /sys/class/proximity/proximity/prox_threshold_high
+    chown system system /sys/class/proximity/proximity/prox_threshold_low
+    chown system system /sys/class/proximity/proximity/prox_thres_param_high
+    chown system system /sys/class/proximity/proximity/prox_thres_param_low
+    chown system system /sys/class/proximity/proximity/prox_pluse_length
+    chown system system /sys/class/proximity/proximity/prox_thres_pulse_count
+    chown system system /sys/class/proximity/proximity/prox_wakelock
+    chown system system /sys/class/proximity/proximity/prox_phone_is_sleep
+    chown system system /sys/class/proximity/proximity/prox_irq
+    chown system system /sys/class/proximity/proximity/prox_offset_cal_verify
+    chown system system /sys/class/proximity/proximity/prox_calibrate_verify
+
+    chmod 0644 /sys/class/proximity/proximity/reg
+    chmod 0644 /sys/class/proximity/proximity/prox_value
+    chmod 0644 /sys/class/proximity/proximity/prox_offset_cal
+    chmod 0644 /sys/class/proximity/proximity/dev_init
+    chmod 0644 /sys/class/proximity/proximity/prox_manual_calibrate_threshold
+    chmod 0644 /sys/class/proximity/proximity/chip_name
+    chmod 0644 /sys/class/proximity/proximity/prox_threshold_cal_start
+    chmod 0644 /sys/class/proximity/proximity/prox_offset_cal_start
+    chmod 0644 /sys/class/proximity/proximity/prox_data_safe_range_max
+    chmod 0644 /sys/class/proximity/proximity/prox_data_safe_range_min
+    chmod 0644 /sys/class/proximity/proximity/prox_calibrate_start
+    chmod 0644 /sys/class/proximity/proximity/prox_calibrate_result
+    chmod 0644 /sys/class/proximity/proximity/prox_debug
+    chmod 0644 /sys/class/proximity/proximity/prox_thres_max
+    chmod 0644 /sys/class/proximity/proximity/prox_thres_min
+    chmod 0644 /sys/class/proximity/proximity/prox_threshold_high
+    chmod 0644 /sys/class/proximity/proximity/prox_threshold_low
+    chmod 0644 /sys/class/proximity/proximity/prox_pluse_length
+    chmod 0644 /sys/class/proximity/proximity/prox_thres_pulse_count
+    chmod 0644 /sys/class/proximity/proximity/prox_irq
+    chmod 0644 /sys/class/proximity/proximity/prox_offset_cal_verify
+    chmod 0644 /sys/class/proximity/proximity/prox_calibrate_verify
+    chown system system /mnt/vendor/persist/sensors/xtalk_cal
+    chmod 0664 /mnt/vendor/persist/sensors/xtalk_cal
+
+    #ztemt:jixd add for infinity calibration ---start
+    mkdir /mnt/vendor/persist/camera 0755 system system
+    chown system system /mnt/vendor/persist/camera
+    chmod 0751 /mnt/vendor/persist/camera
+    chown system system /mnt/vendor/persist/camera/camera_focus_pos.conf
+    chmod 0644 /mnt/vendor/persist/camera/camera_focus_pos.conf
+    chown system system /mnt/vendor/persist/camera/camera_focus_pos_sub.conf
+    chmod 0644 /mnt/vendor/persist/camera/camera_focus_pos_sub.conf
+    #ztemt:jixd add for infinity calibration ---end
+
+    # light
+    chown system system /sys/class/light/light/enable
+    chown system system /sys/class/light/light/tp_cfg
+    chown system system /sys/class/light/light/fac_calibrate
+    chown system system /sys/class/light/light/calibrate
+    chown system system /sys/class/light/light/chip_name
+    chown system system /sys/class/light/light/light_value
+    chown system system /sys/class/light/light/delay
+    chown system system /sys/class/light/light/red_data
+    chown system system /sys/class/light/light/green_data
+    chown system system /sys/class/light/light/blue_data
+    chown system system /sys/class/light/light/clear_data
+    chown system system /sys/class/light/light/dump_reg
+    chown system system /sys/class/light/light/module_tpcolor
+    chown system system /sys/class/light/light/dump_tp_parameter
+    chown system system /sys/class/light/light/dev_init
+    chown system system /mnt/vendor/persist/sensors/rgb_color_cfg
+    chown system system /mnt/vendor/persist/sensors/rgbc_cfg
+    chown system system /mnt/vendor/persist/sensors/als_cal_data
+
+    chmod 0644   /sys/class/light/light/enable
+    chmod 0644   /sys/class/light/light/tp_cfg
+    chmod 0644   /sys/class/light/light/fac_calibrate
+    chmod 0644   /sys/class/light/light/calibrate
+    chmod 0644   /sys/class/light/light/chip_name
+    chmod 0644   /sys/class/light/light/light_value
+    chmod 0644   /sys/class/light/light/delay
+    chmod 0644   /sys/class/light/light/red_data
+    chmod 0644   /sys/class/light/light/blue_data
+    chmod 0644   /sys/class/light/light/green_data
+    chmod 0644   /sys/class/light/light/clear_data
+    chmod 0644   /sys/class/light/light/dump_reg
+    chmod 0644   /sys/class/light/light/module_tpcolor
+    chmod 0644   /sys/class/light/light/dump_tp_parameter
+    chmod 0644   /sys/class/light/light/dev_init
+    chmod 0664   /mnt/vendor/persist/sensors/rgb_color_cfg
+    chmod 0664   /mnt/vendor/persist/sensors/rgbc_cfg
+    chmod 0664   /mnt/vendor/persist/sensors/als_cal_data
+
+    # Breath light
+    chown system system /sys/class/leds/nubia_led/brightness
+    chown system system /sys/class/leds/nubia_led/fade_parameter
+    chown system system /sys/class/leds/nubia_led/grade_parameter
+    chown system system /sys/class/leds/nubia_led/outn
+    chown system system /sys/class/leds/nubia_led/blink_mode
+
+    # sensors key  event
+    chmod 0664 /dev/input/event0
+    chmod 0664 /dev/input/event1
+    chmod 0664 /dev/input/event2
+    chmod 0664 /dev/input/event3
+    chmod 0664 /dev/input/event4
+    chmod 0664 /dev/input/event5
+    chmod 0664 /dev/input/event6
+    chmod 0664 /dev/input/event7
+    chmod 0664 /dev/input/event8
+
+    # Vibartor
+    chmod 0660 /dev/drv2605
+    chown system system /dev/drv2605
+    chown system system /sys/class/timed_output/vibrator_drv2605/enable
+
+    # Create directory used for display
+    mkdir /mnt/vendor/persist/display 0770 system graphics
+
+    # Create vpp directory
+    mkdir /mnt/vendor/persist/vpp 0770 media media
+    
+    #for KcalMod
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_enable
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_cont
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_sat
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_hue
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_min
+    chown system system /sys/devices/platform/kcal_ctrl.0/kcal_val
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_enable
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_cont
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_sat
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_hue
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_min
+    chmod 0660 /sys/devices/platform/kcal_ctrl.0/kcal_val
+    
+on post-fs-data
+    #Create directories for Fingerprint
+    mkdir /data/vendor/misc/qti_fp 0770 system system
+    mkdir /data/vendor/misc/qti_fp/bg_estimation 0770 system system
+    mkdir /data/vendor/misc/qti_fp/calib_test 0770 system system
+    mkdir /data/vendor/misc/qti_fp/database 0770 system system
+    
+    # create directory for nfc- give nfc the read/write access to
+    # the following directory-added by ZTEMT 2015.1.8
+    mkdir /data/vendor/nfc 0770 nfc nfc
+    mkdir /data/vendor/nfc/param 0770 nfc nfc
+    
+    #Create folder for mm-qcamera-daemon
+    #ZTEMT zhouruoyu modify for camera-daemon permission --- start
+    mkdir /data/misc/camera 0775 camera camera
+    mkdir /data/nubiaeffect 0777 camera camera
+    #ZTEMT zhouruoyu modify for camera-daemon permission --- end
+    
+    # set aggressive read ahead for dm-0 and dm-1 during boot up
+    write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/dm-1/queue/read_ahead_kb 2048
+    
+    # add nubia embedlog
+    wait /dev/block/bootdevice/by-name/embedlog
+    mount ext3 /dev/block/bootdevice/by-name/embedlog /embedlog rw nosuid noatime nodev barrier=1 context=u:object_r:embedlog_file:s0
+    
+on property:sys.boot_completed=1
+    write /dev/kmsg "Boot completed "
+    #Reset read ahead for dm-0 and dm-1 to 512kb
+    write /sys/block/dm-0/queue/read_ahead_kb 512
+    write /sys/block/dm-1/queue/read_ahead_kb 512
+    
+# corefile limit
+on property:persist.debug.trace=1
+    mkdir /data/core 0777 root root
+    write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"

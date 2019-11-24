@@ -1,0 +1,11 @@
+# Fingerprint
+type fingerprint_device, dev_type;
+
+# drv2605
+type haptics_device, dev_type;
+
+# IR Remote
+type ir_remote_device, dev_type;
+
+#latency
+type latency_device, dev_type;

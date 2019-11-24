@@ -1,0 +1,7 @@
+allow hal_audio_default vendor_data_file:file rw_file_perms;
+allow hal_audio_default mnt_vendor_file:file { open read };
+allow hal_audio_default mnt_vendor_file:dir search;
+allow hal_audio_default vendor_data_file:dir { write add_name create };
+
+get_prop(hal_audio_default, dirac_prop)
+set_prop(hal_audio_default, dirac_prop)

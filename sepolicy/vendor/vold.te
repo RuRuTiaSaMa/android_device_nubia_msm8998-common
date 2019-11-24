@@ -1,0 +1,3 @@
+allow vold sysfs_scsi_devices_0000:file write;
+allow vold vold_prepare_subdirs:process noatsecure;
+allow vold sdcardd:process noatsecure;

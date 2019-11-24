@@ -1,0 +1,68 @@
+# TAS2555 Amplifier
+/dev/tas2555                                                                                            u:object_r:audio_device:s0
+/dev/tiload_node                                                                                        u:object_r:alarm_device:s0
+
+# Amplifier persist files
+/persist/tas2555_cal\.bin                                                                               u:object_r:persist_amp_cal_file:s0
+
+# FRP partition
+/dev/block/bootdevice/by-name/frp                                                                       u:object_r:frp_block_device:s0
+
+# Fingerprint
+/dev/fpc                                                                                                u:object_r:fingerprint_device:s0
+/sys/devices/soc/1.fpc1020(/.*)?                                                                        u:object_r:sysfs_fingerprint:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint\.fpc@2\.1-service u:object_r:hal_fingerprint_default_exec:s0
+
+# NFC
+/dev/bcm2079x                                                                                           u:object_r:nfc_device:s0
+
+# Haptic
+/dev/drv2605                                                                                            u:object_r:haptics_device:s0
+
+#Health
+/vendor/bin/hw/android\.hardware\.health@2\.0-service      u:object_r:hal_health_default_exec:s0
+
+# Light HAL
+/sys/class/leds(/.*)?                                                                                   u:object_r:sysfs_leds:s0
+
+# Input files
+/vendor/usr/idc(/.*)?                                                                                   u:object_r:idc_file:s0
+/vendor/usr/keylayout(/.*)?                                                                             u:object_r:keylayout_file:s0
+
+# IR Remote
+/dev/ttyMSM1                                                                                            u:object_r:ir_remote_device:s0
+/dev/ir_remote                                                                                          u:object_r:ir_remote_device:s0
+/sys/class/ir_remote/ir_remote/enable                                                                   u:object_r:sysfs_ir_remote:s0
+/sys/devices/virtual/ir_remote/ir_remote/enable                                                         u:object_r:sysfs_ir_remote:s0
+
+# msm_irqbalance
+/vendor/bin/msm_irqbalance  u:object_r:irqbalance_exec:s0
+
+#/persist
+/persist/battery(/.*)?    u:object_r:persist_battery_file:s0
+
+# Touchpanel
+/sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input1/0dbutton                                         u:object_r:sysfs_touchpanel:s0
+/sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input1/wake_gesture                                     u:object_r:sysfs_touchpanel:s0
+
+# Power HAL
+/(vendor|system/vendor)/bin/hw/android\.hardware\.power@1\.3-service\.nubia_msm8998-libperfmgr     u:object_r:hal_power_default_exec:s0
+
+# Vibrator
+/sys/devices/virtual/timed_output/vibrator(/.*)?                                                        u:object_r:sysfs_vibrator:s0
+
+# wlan address
+/sys/devices/soc/18800000.qcom,icnss/net/wlan0/address                                                          u:object_r:sysfs_wlan_address:s0
+
+# USB HAL
+/(vendor|system/vendor)/bin/hw/android\.hardware\.usb@1\.1-service\.nubia_msm8998      u:object_r:hal_usb_impl_exec:s0
+
+# Wifi driver state
+/sys/kernel/boot_wlan(/.*)? u:object_r:sysfs_wifi_driver_state:s0
+
+# Kcal	
+/sys/devices/platform/kcal_ctrl.0(/.*)?			u:object_r:kcal_dev:s0	
+/sys/bus/platform/drivers/kcal_ctrl(/.*)?		u:object_r:kcal_dev:s0
+
+# Usb Fast Charge
+/sys/kernel/fast_charge/force_fast_charge  u:object_r:sysfs_usb_charge:s0

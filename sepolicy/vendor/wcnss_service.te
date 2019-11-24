@@ -1,0 +1,2 @@
+allow wcnss_service sysfs:file { getattr open read };
+allow wcnss_service core_data_file_type:dir search;
